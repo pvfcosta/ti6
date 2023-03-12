@@ -14,7 +14,7 @@ allResults = []
 
 query = """
 {
-  search(query: "",type: USER, first: 10) {
+  search(type: USER, first: 30, query: "queer in:bio") {
     userCount
     pageInfo {
       endCursor
@@ -36,7 +36,7 @@ query = """
 endCursor = "null"
 
 error = 0
-while (len(allResults) < 10000):
+while (len(allResults) < 1000):
     request = requests.post('https://api.github.com/graphql',
                             json={'query': query}, headers=headers)
     result = request.json()
@@ -44,8 +44,7 @@ while (len(allResults) < 10000):
       nodes = result['data']['search']['edges']
       for node in nodes:
         if node['node'] and node['node']['bio']:
-          if ':rainbow-flag' in node['node']['bio']:
-            allResults.append(node['node'])
+          allResults.append(node['node'])
 
       query = query.replace(endCursor, '"'+result['data']
                               ['search']['pageInfo']['endCursor']+'"')
