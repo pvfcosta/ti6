@@ -14,19 +14,16 @@ allResults = []
 
 query = """
 {
-  search(type: USER, first: 30, query: "queer in:bio") {
+  search(query: "queer in:bio", type: USER, first: 100, after:null) {
     userCount
     pageInfo {
       endCursor
       startCursor
     }
-    edges {
-      node {
-        ... on User {
-          name
-          login
-          bio
-        }
+    nodes {
+      ... on User {
+        name,
+        bio
       }
     }
   }
@@ -36,18 +33,17 @@ query = """
 endCursor = "null"
 
 error = 0
-while (len(allResults) < 1000):
+while (len(allResults) < 10000):
     request = requests.post('https://api.github.com/graphql',
                             json={'query': query}, headers=headers)
     result = request.json()
     if 'data' in result:
-      nodes = result['data']['search']['edges']
-      for node in nodes:
-        if node['node'] and node['node']['bio']:
-          allResults.append(node['node'])
-
+      allResults  += result['data']['search']['nodes']
+      print(result['data']['search']['pageInfo']['endCursor'])
+      if result['data']['search']['pageInfo']['endCursor'] == None:
+        break
       query = query.replace(endCursor, '"'+result['data']
-                              ['search']['pageInfo']['endCursor']+'"')
+                                ['search']['pageInfo']['endCursor']+'"')
       endCursor = '"'+result['data']['search']['pageInfo']['endCursor']+'"'
     else:
         error += 1
