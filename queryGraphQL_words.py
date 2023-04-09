@@ -4,12 +4,13 @@ import pandas as pd
 import matplotlib.pyplot as plot
 
 # colocar token aqui
-token = "9OB8VQzEgURy2ztZBs0T4qNZxO9UTi3kLLDr"
+token = "KM4r0WcRDdbDewRvZ71dMEjG0kLky543xsx6"
 
 headers = {"Authorization": "bearer ghp_"+token}
 
 allResults = []
 allWordsResults = []
+allOrganizations = []
 
 words = ["queer", "rainbow_flag", "transgender_flag", "nonbinary", "non binary", "lesbian",
          "bisexual", "asexual", "pansexual", "transgender", "they them", "he them", "she them"]
@@ -35,8 +36,15 @@ query = """
         status {
           emoji
         }
-        organizations(first: 10) {
+        organizations(first: 17) {
           totalCount
+          edges {
+            node {
+              url
+              name
+              isVerified
+            }
+          }
         }
       }
     }
@@ -87,6 +95,11 @@ for word in words:
                 wordResults['organizations'].append(
                     node['organizations']['totalCount'])
 
+                # itera sobre organizacoes dos usuarios
+                for org in node['organizations']['edges']:
+                    if org['node'] is not None:
+                        allOrganizations.append(org['node'])
+
             print(result['data']['search']['pageInfo']['endCursor'])
             if result['data']['search']['pageInfo']['endCursor'] == None:
                 break
@@ -104,6 +117,10 @@ for word in words:
             else:
                 pass
     allWordsResults.append(wordResults)
+
+dfOrgs = pd.DataFrame(allOrganizations)
+
+dfOrgs.to_csv('organizations.csv', index=False, sep=';',encoding='utf-8')
 
 with pd.ExcelWriter('users.xlsx', engine='xlsxwriter') as writer:
     for wordResults in allWordsResults:
