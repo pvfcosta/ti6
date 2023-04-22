@@ -1,7 +1,7 @@
 
 import requests
 import pandas as pd
-import matplotlib.pyplot as plot
+import datetime
 
 # colocar token aqui
 token = "KM4r0WcRDdbDewRvZ71dMEjG0kLky543xsx6"
@@ -26,6 +26,9 @@ query = """
     }
     nodes {
       ... on User {
+        id
+        databaseId
+        email
         login
         name
         bio
@@ -33,8 +36,15 @@ query = """
         url
         pronouns
         createdAt
+        location
         status {
           emoji
+        }
+        pullRequests {
+          totalCount
+        }
+        issues {
+          totalCount
         }
         organizations(first: 17) {
           totalCount
@@ -43,8 +53,28 @@ query = """
               url
               name
               isVerified
+              repositories(first: 1, privacy: PUBLIC) {
+                totalCount
+              }
             }
           }
+        }
+        contributionsCollection {
+          totalCommitContributions
+          startedAt
+          endedAt
+        }
+        followers {
+          totalCount
+        }
+        following {
+          totalCount
+        }
+        sponsors {
+          totalCount
+        }
+        sponsoring {
+          totalCount
         }
       }
     }
@@ -55,6 +85,8 @@ term = "term"
 
 error = 0
 i = 0
+
+today = datetime.datetime.utcnow()
 for word in words:
     query = query.replace(term, word)
     term = word
@@ -71,14 +103,26 @@ for word in words:
         'url': [],
         'pronouns': [],
         'createdAt': [],
+        'location': [],
         'status': [],
-        'organizations': []
+        'pullRequests': [],
+        'issues': [],
+        'organizations': [],
+        'totalCommitContributions': [],
+        'commitsStartedAt': [],
+        'commitsEndedAt': [],
+        'commitsPerWeek': [],
+        'accountAge': [],
+        'followers': [],
+        'following': [],
+        'sponsors': [],
+        'sponsoring': []
     }
     while True:
         request = requests.post('https://api.github.com/graphql',
                                 json={'query': query}, headers=headers)
         result = request.json()
-        if 'data' in result:
+        if 'data' in result and result['data'] is not None:
             allResults += result['data']['search']['nodes']
 
             # logica pra separar por aba da tabela
@@ -91,13 +135,40 @@ for word in words:
                 wordResults['bioHTML'].append(node['bioHTML'])
                 wordResults['pronouns'].append(node['pronouns'])
                 wordResults['createdAt'].append(node['createdAt'])
+                wordResults['location'].append(node['location'])
                 wordResults['status'].append(node['status'])
+                wordResults['pullRequests'].append(node['pullRequests']['totalCount'])
+                wordResults['issues'].append(node['issues']['totalCount'])
                 wordResults['organizations'].append(
                     node['organizations']['totalCount'])
+                wordResults['totalCommitContributions'].append(
+                    node['contributionsCollection']['totalCommitContributions'])
+                wordResults['commitsStartedAt'].append(
+                    node['contributionsCollection']['startedAt'])
+                wordResults['commitsEndedAt'].append(
+                    node['contributionsCollection']['endedAt'])
+                createdAt = datetime.datetime.strptime(
+                    node['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
+                accountAgeInDays = today - createdAt
+                wordResults['accountAge'].append(accountAgeInDays.days)
+                wordResults['followers'].append(node['followers']['totalCount'])
+                wordResults['following'].append(node['following']['totalCount'])
+                wordResults['sponsors'].append(node['sponsors']['totalCount'])
+                wordResults['sponsoring'].append(node['sponsoring']['totalCount'])
+
+                # calcula frequencia de commits
+                commitsStartedAt = datetime.datetime.strptime(
+                    node['contributionsCollection']['startedAt'], '%Y-%m-%dT%H:%M:%SZ')
+                commitsEndedAt = datetime.datetime.strptime(
+                    node['contributionsCollection']['endedAt'], '%Y-%m-%dT%H:%M:%SZ')
+                contributionTime = commitsEndedAt - commitsStartedAt
+                commitsPerWeek = node['contributionsCollection']['totalCommitContributions'] / ( contributionTime.days / 7 )
+                wordResults['commitsPerWeek'].append(commitsPerWeek)
 
                 # itera sobre organizacoes dos usuarios
                 for org in node['organizations']['edges']:
                     if org['node'] is not None:
+                        org['node']['repositories'] = org['node']['repositories']['totalCount']
                         allOrganizations.append(org['node'])
 
             print(result['data']['search']['pageInfo']['endCursor'])
@@ -120,10 +191,11 @@ for word in words:
 
 dfOrgs = pd.DataFrame(allOrganizations)
 
-dfOrgs.to_csv('organizations.csv', index=False, sep=';',encoding='utf-8')
+dfOrgs.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
 
 with pd.ExcelWriter('users.xlsx', engine='xlsxwriter') as writer:
     for wordResults in allWordsResults:
         dfWord = pd.DataFrame(wordResults)
-        dfWord.to_excel(
-            writer, sheet_name=wordResults['search'][0], index=False)
+        if len(wordResults['search']) > 0:
+          dfWord.to_excel(
+              writer, sheet_name=wordResults['search'][0], index=False)
