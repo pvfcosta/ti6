@@ -1,7 +1,6 @@
 import requests
-import pandas as pd
-import matplotlib.pyplot as plot
 import pymongo
+import time
 
 connection_string = f"mongodb+srv://pvfcosta:dsh2023.retorno@ti6-lbtqia-research.bdfqdy0.mongodb.net/test"
 
@@ -14,15 +13,16 @@ GITHUB_API_ENDPOINT = "https://api.github.com/graphql"
 NUMBER_OF_ATTEMPTS = 15
 
 # colocar token aqui
-token = "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"
+token = "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"
 
 CURSOR_QUERY = """
 query($login:String!,$cursor:String!)
 {
   user(login: $login) {
-    followers(after: $cursor, first: 50) {
+    sponsors(after: $cursor, first: 50) {
       nodes {
-        login
+        ... on User { login }
+        ... on Organization { login }
       }
       pageInfo {
         endCursor
@@ -37,9 +37,10 @@ INITIAL_QUERY = """
 query($login:String!)
 {
   user(login: $login) {
-    followers(after: null, first: 50) {
+    sponsors(after: null, first: 50) {
       nodes {
-        login
+        ... on User { login }
+        ... on Organization { login }
       }
       pageInfo {
         endCursor
@@ -57,13 +58,13 @@ if user_collection in mydb.list_collection_names():
 else:
     print("The collection doesn't exist.")
 
-follow_collection = "follow"
+sponsor_collection = "sponsor"
 
-if follow_collection in mydb.list_collection_names():
+if sponsor_collection in mydb.list_collection_names():
   print("The collection exists.")
-  foll_conn_collection = mydb[follow_collection]
+  foll_conn_collection = mydb[sponsor_collection]
 else:
-  foll_conn_collection = mydb.create_collection(follow_collection)
+  foll_conn_collection = mydb.create_collection(sponsor_collection)
 
 def run_query_variables(query, attemp, variables):
 
@@ -76,20 +77,20 @@ def run_query_variables(query, attemp, variables):
         elif attemp <= NUMBER_OF_ATTEMPTS:
             print("Tentativa de conexão falhou :(. {}/{} Tentando novamente...".format(attemp,
                   NUMBER_OF_ATTEMPTS))
-            #sleep(1)
+            time.sleep(1)
             return run_query_variables(query, attemp + 1, variables)
         else:
             raise Exception("Tentativa de conexão falhou com o erro: {}. {}".format(
                 request.status_code, query))
 
-def save_followers(login, followers):
+def save_sponsor(login, sponsors):
     data = []
-    for follow in followers:
-        follower = {
+    for sp in sponsors:
+        sponsor = {
             "followed": login,
-            "following": follow["login"]
+            "following": sp["login"]
         }
-        data.append(follower)
+        data.append(sponsor)
 
     if len(data) > 0:
         foll_conn_collection.insert_many(data)
@@ -97,22 +98,22 @@ def save_followers(login, followers):
         print("No data to be inserted")
 
 
-def fetch_followers(login):
+def fetch_sponsors(login):
     variables = {"login": login}
     has_next = True
     i = 0
     end_cursor = "null"
-    follows = []
+    sponsors = []
     query = INITIAL_QUERY
 
     response = run_query_variables(query, 1, variables)
 
-    follows += response["data"]["user"]["followers"]["nodes"]
+    sponsors += response["data"]["user"]["sponsors"]["nodes"]
 
-    has_next = response["data"]["user"]["followers"]["pageInfo"]["hasNextPage"]
+    has_next = response["data"]["user"]["sponsors"]["pageInfo"]["hasNextPage"]
 
     if has_next:
-        end_cursor = response["data"]["user"]["followers"]["pageInfo"]["endCursor"]
+        end_cursor = response["data"]["user"]["sponsors"]["pageInfo"]["endCursor"]
 
     i += 1
 
@@ -124,24 +125,24 @@ def fetch_followers(login):
 
         response = run_query_variables(query, 1, variables)
 
-        has_next = response["data"]["user"]["followers"]["pageInfo"]["hasNextPage"]
+        has_next = response["data"]["user"]["sponsors"]["pageInfo"]["hasNextPage"]
 
         if has_next:
-            end_cursor = response["data"]["user"]["followers"]["pageInfo"]["endCursor"]
+            end_cursor = response["data"]["user"]["sponsors"]["pageInfo"]["endCursor"]
 
-        follows += response["data"]["user"]["followers"]["nodes"]
+        sponsors += response["data"]["user"]["sponsors"]["nodes"]
 
         print(end_cursor)
 
         i += 1
 
-    save_followers(login, follows)
+    save_sponsor(login, sponsors)
 
 cursor = user_conn_collection.find({})    
 
 for document in cursor:
     login = document['login']
     print('usuario' + login)
-    fetch_followers(login)
+    fetch_sponsors(login)
 
 print('Done!')
