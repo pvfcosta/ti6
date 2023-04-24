@@ -4,13 +4,14 @@ import pandas as pd
 import datetime
 
 # colocar token aqui
-token = "KM4r0WcRDdbDewRvZ71dMEjG0kLky543xsx6"
+token = "VzC9sNghkF0NWRtRC2e5oMzbH6dIQI2sHsP4"
 
 headers = {"Authorization": "bearer ghp_"+token}
 
 allResults = []
 allWordsResults = []
 allOrganizations = []
+membersColumn = []
 
 words = ["queer", "rainbow_flag", "transgender_flag", "nonbinary", "non binary", "lesbian",
          "bisexual", "asexual", "pansexual", "transgender", "they them", "he them", "she them"]
@@ -54,6 +55,9 @@ query = """
               name
               isVerified
               repositories(first: 1, privacy: PUBLIC) {
+                totalCount
+              }
+              membersWithRole {
                 totalCount
               }
             }
@@ -164,13 +168,19 @@ for word in words:
                 contributionTime = commitsEndedAt - commitsStartedAt
                 commitsPerWeek = node['contributionsCollection']['totalCommitContributions'] / ( contributionTime.days / 7 )
                 wordResults['commitsPerWeek'].append(commitsPerWeek)
-
+               
                 # itera sobre organizacoes dos usuarios
                 for org in node['organizations']['edges']:
                     if org['node'] is not None:
-                        org['node']['repositories'] = org['node']['repositories']['totalCount']
-                        allOrganizations.append(org['node'])
-
+                        org['node']['repositories'] = org['node']['repositories']['totalCount']   
+                        org['node']['membersWithRole'] = org['node']['membersWithRole']['totalCount']                    
+                        if org['node'] in allOrganizations:
+                            indice = allOrganizations.index(org['node'])
+                            membersColumn[indice] += 1 
+                        else:
+                            allOrganizations.append(org['node'])
+                            membersColumn.append(1)
+          
             print(result['data']['search']['pageInfo']['endCursor'])
             if result['data']['search']['pageInfo']['endCursor'] == None:
                 break
@@ -189,9 +199,15 @@ for word in words:
                 pass
     allWordsResults.append(wordResults)
 
+members = pd.Series(membersColumn, name='members')
+
 dfOrgs = pd.DataFrame(allOrganizations)
 
 dfOrgs.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
+
+df = pd.read_csv('organizations.csv', sep=";")
+teste_concat = pd.concat([df, members], axis=1)
+teste_concat.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
 
 with pd.ExcelWriter('users.xlsx', engine='xlsxwriter') as writer:
     for wordResults in allWordsResults:
@@ -199,3 +215,4 @@ with pd.ExcelWriter('users.xlsx', engine='xlsxwriter') as writer:
         if len(wordResults['search']) > 0:
           dfWord.to_excel(
               writer, sheet_name=wordResults['search'][0], index=False)
+

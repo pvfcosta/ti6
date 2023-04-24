@@ -1,358 +1,229 @@
-url;name;isVerified;repositories
-https://github.com/mewna;Mewna;True;18
-https://github.com/bots-gg;bots.gg;False;3
-https://github.com/massdriver-cloud;Massdriver, Inc.;False;91
-https://github.com/resque;Resque;False;9
-https://github.com/pedestal;Pedestal;False;7
-https://github.com/spreadshirt;Spreadshirt;False;40
-https://github.com/codegirls;codegirls;False;13
-https://github.com/pixie-lang;pixie-lang;False;6
-https://github.com/heartheartheart;The <3<3<3 collective;False;2
-https://github.com/partkeepr;PartKeepr;True;27
-https://github.com/codekuma;Code Kuma;False;2
-https://github.com/mdx-js;mdx-js;True;13
-https://github.com/haskell-paris;haskell-paris;False;4
-https://github.com/uwa;The University of Western Australia;False;0
-https://github.com/SoutHACKton;SoutHACKton;False;4
-https://github.com/IBM;International Business Machines;True;2844
-https://github.com/somakeit;So Make It;False;51
-https://github.com/lapoissonnerie;La poissonnerie;False;0
-https://github.com/Day-One-Engagement-Competences;Day One;False;0
-https://github.com/themanaworld;The Mana World;True;26
-https://github.com/dogbin;dogbin;False;7
-https://github.com/openrightsgroup;Open Rights Group;False;31
-https://github.com/elixir-lang;The Elixir programming language;False;10
-https://github.com/Code-and-Coffee-YVR;Code & Coffee;False;8
-https://github.com/robot-overlord;Robot Overlord Software Inc.;False;2
-https://github.com/YVRDev;YVRDev;False;5
-https://github.com/vanfp;Vancouver Functional Programming Meetup;False;3
-https://github.com/cambiecollective;Cambie Collective;False;5
-https://github.com/spadebuilders;SPADE;False;19
-https://github.com/fission-codes;Fission;True;116
-https://github.com/ethereum-specification;Ethereum Specification;False;1
-https://github.com/witchcrafters;Witchcraft Suite;False;6
-https://github.com/ucan-wg;UCAN Working Group;False;17
-https://github.com/wnfs-wg;WNFS Working Group;False;7
-https://github.com/ipvm-wg;IPVM Working Group;False;4
-https://github.com/RhizomeDB;RhizomeDB;False;1
-https://github.com/oddsdk;ODD SDK;False;15
-https://github.com/highgroove;Big Nerd Ranch;False;34
-https://github.com/wiserstudios;Wiserstudios LLC;False;10
-https://github.com/deftinc;Deft Inc;True;18
-https://github.com/flowerworkio;Flowerwork;True;4
-https://github.com/flowerworkio-seeds;Flowerwork seeds;False;2
-https://github.com/compassx-group;CompassX Group;False;0
-https://github.com/ricochet-im;Ricochet IM;False;4
-https://github.com/GitHubBounty;GitHub Security Bug Bounty;False;0
-https://github.com/OnionScan;OnionScan;False;1
-https://github.com/OpenPriv;Open Privacy;False;2
-https://github.com/namecoin;Namecoin;False;59
-https://github.com/ThreatDetectives;ThreatDetectives;False;5
-https://github.com/nzgreens;Green Party of Aotearoa / NZ;False;5
-https://github.com/yourfirstpr;Your First PR;False;1
-https://github.com/WeAllJS;WeAllJS;False;5
-https://github.com/maintainers;Open Source Maintainers on GitHub [moved];False;3
-https://github.com/fruitfuljs;fruitful;False;2
-https://github.com/entropic-dev;Entropic;False;11
-https://github.com/mutantstandard;Mutant Standard;False;4
-https://github.com/voxpupuli;Vox Pupuli;False;296
-https://github.com/FFPiHaskell;Fortgeschrittene Funktionale Programmierung In Haskell;False;6
-https://github.com/CraftMinecraft;CMC Development;False;28
-https://github.com/SmartSimTech;SmartSimTech;False;1
-https://github.com/FlatStoneTech;FlatStone Tech;False;3
-https://github.com/FireLabsCA;FireLabs;False;0
-https://github.com/BlueHuskyStudios;Blue Husky Studios;True;72
-https://github.com/EpicGames;Epic Games;False;11
-https://github.com/Peekeet;Peekeet Ltd;False;2
-https://github.com/inkstainblue;Ink Stain Blue;False;1
-https://github.com/geeksforsocialchange;Geeks for Social Change;False;25
-https://github.com/replicate;Replicate;False;44
-https://github.com/GenderedIntelligence;Gendered Intelligence;False;2
-https://github.com/The-White-Pube;The White Pube;False;0
-https://github.com/diversityMuenchen;diversity München;False;2
-https://github.com/eu;eu;False;2
-https://github.com/kuswo;Kommunal & selbstverwaltet Wohnen;False;0
-https://github.com/compliantcannabis-com;Compliant Cannabis;False;0
-https://github.com/quai10;Quai n°10;False;5
-https://github.com/RaccoonStudio;Raccoon Studio;False;3
-https://github.com/THISSpartans;{Hack, THIS};False;6
-https://github.com/fosbosmuenchen;Staatl. FOSBOS München;False;1
-https://github.com/squareup;Square, Inc;True;0
-https://github.com/algorhythm-electronics;AlgoRhythm Electronics;False;0
-https://github.com/fastly;Fastly;False;221
-https://github.com/NorgannasAddOns;Norganna's AddOns Pty Ltd;False;10
-https://github.com/cs690;CS 490/690 Projects;False;2
-https://github.com/usfvgl;USF Visualization and Graphics Lab (VGL);False;7
-https://github.com/usf-cs212-2016;CS 212 Software Development;False;2
-https://github.com/usf-cs360-spring2020;CS 360/560 Data Visualization;False;134
-https://github.com/usf-cs272-spring2022;CS 272 Software Development;False;23
-https://github.com/StagsCIT2016;StagsCIT2016 - PTAH org;False;1
-https://github.com/hackforchange;hackforchange;False;15
-https://github.com/HRSF89;HRSF89;False;1
-https://github.com/lefty-dev;LeftDev;False;0
-https://github.com/commIT-Group;commIT Group;False;3
-https://github.com/fromthefront;From the Front;False;8
-https://github.com/creativemarket;Creative Market;False;46
-https://github.com/urbanairship;Airship;False;161
-https://github.com/jazzband;Jazzband;True;74
-https://github.com/preceptor;Preceptor Educação a Distância;False;16
-https://github.com/cgauge;CustomerGauge;False;15
-https://github.com/messloc;messloc;False;2
-https://github.com/DCPUTeam;DCPU Team;False;8
-https://github.com/Lysdev;Lysdev;False;0
-https://github.com/HurricaneHackers;HurricaneHackers;False;13
-https://github.com/ncss-2013;ncss-2013;False;3
-https://github.com/galaxy-team;The Galaxy Team;False;9
-https://github.com/duckdb;DuckDB;False;10
-https://github.com/columbusrb;Columbus Ruby Brigade;False;9
-https://github.com/InnovaPartners;Innova Partners;False;3
-https://github.com/SSXModding;SSX Modding Community;False;11
-https://github.com/messloc;messloc;False;2
-https://github.com/SpaceySciences;UGA Small Satellite Research Lab;False;15
-https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63
-https://github.com/ArctarusLimited;Arctarus Limited;True;22
-https://github.com/StrataSource;Strata Source;False;56
-https://github.com/simplifi;Simpli.fi;True;47
-https://github.com/singularity-viewer;Singularity Viewer Team;False;8
-https://github.com/golemfoundation;Golem Foundation;True;7
-https://github.com/ValleyCraft-Dev-Team;ValleyCraft Dev Team;False;10
-https://github.com/IrisGenderTalk;「彩虹女神說性別」Iris Gender Talk;False;1
-https://github.com/mint-lgbt;mint.lgbt;True;28
-https://github.com/themintfarm;The Mint Farm;True;8
-https://github.com/bridges-anime;bridges;False;2
-https://github.com/lunasoldstuff;Luna's Old Stuff;False;35
-https://github.com/go-gitnub;GitNub;False;1
-https://github.com/getriver;River;False;3
-https://github.com/KitsuCommunity;KitsuCommunity;False;6
-https://github.com/SassDoc;SassDoc;False;16
-https://github.com/Shopify;Shopify;True;926
-https://github.com/okfn-brasil;Open Knowledge Brasil - Rede pelo Conhecimento Livre;False;112
-https://github.com/worldbank;World Bank Group;False;178
-https://github.com/InternetSemLimites;Internet Sem Limites;False;3
-https://github.com/flask-extensions;Flask Extensions;False;5
-https://github.com/moveaxlab;moveax srl;False;23
-https://github.com/together-support;together-support;False;3
-https://github.com/rednit-team;rednit;False;8
-https://github.com/stackblitz;StackBlitz;True;33
-https://github.com/ebanalyse;Ekstra Bladet;False;12
-https://github.com/pnk-sh;pnk.sh;False;13
-https://github.com/justlittlebot-com;justlittlebot.com;False;0
-https://github.com/4Soft;4Soft;False;12
-https://github.com/factorial-io;Factorial;False;106
-https://github.com/pangolinjs;Pangolin.js;True;12
-https://github.com/miyagi-dev;miyagi;False;7
-https://github.com/mutantstandard;Mutant Standard;False;4
-https://github.com/PHP-FFMpeg;PHP-FFMpeg;False;3
-https://github.com/Karisch;Karisch IT Services;False;9
-https://github.com/comPHPiler;comPHPiler;False;0
-https://github.com/Bartacus;Bartacus;False;12
-https://github.com/nucleo-digital;Núcleo Digital;False;38
-https://github.com/SGDInstitute;Midwest Institute for Sexuality and Gender Diversity;False;5
-https://github.com/code4nova;Code for Northern Virginia (NoVA);False;26
-https://github.com/The-Property-Estimators;The-Property-Estimators;False;1
-https://github.com/felix-lang;Felix Programming Language;False;20
-https://github.com/integratedmarketingtechnologies;Integrated Marketing Technologies;False;2
-https://github.com/iTrace-Dev;iTrace-Dev;False;8
-https://github.com/anegostudios;Anego Studios;False;24
-https://github.com/PolyplexEngine;Polyplex;False;20
-https://github.com/glimpse-editor;Glimpse Image Editor;False;7
-https://github.com/CospecGames;Cospec Games;False;3
-https://github.com/KitsunebiGames;Kitsunebi;False;9
-https://github.com/Inochi2D;Inochi2D;True;40
-https://github.com/hoedown;Hoedown;False;19
-https://github.com/nodejs;Node.js;True;201
-https://github.com/botgram;Botgram;False;7
-https://github.com/themanaworld;The Mana World;True;26
-https://github.com/Kingdom-of-The-Moon;Kingdom of The Moon ;False;24
-https://github.com/railsgirlsrj;Rails Girls RJ;False;3
-https://github.com/TechWomenOnBeer;Tech Women On Beer;False;1
-https://github.com/ProgramacaoParaTodes;Programação para Todes;False;6
-https://github.com/VoiceGym;VoiceGym;False;3
-https://github.com/scyllo-oss;Scyllo;False;1
-https://github.com/discatpy-dev;DisCatPy;False;3
-https://github.com/govhackaustralia;GovHack Australia;False;15
-https://github.com/accessible-melbourne;accessible-melbourne;False;4
-https://github.com/techinschools;techinschools;False;1
-https://github.com/Savvanah21;Savvanah21;False;0
-https://github.com/authmyproject;AuthMyProject;True;0
-https://github.com/hackclub;Hack Club;True;365
-https://github.com/PGamerX-Legacy;PGamerx Legacy;False;4
-https://github.com/Stardust-Industries;Stardust-Industries;False;6
-https://github.com/MobilePorting;Mobile Porting Team;False;15
-https://github.com/Test-Engine-Team;Test Engine;False;2
-https://github.com/ticketfrei;Ticketfrei;False;4
-https://github.com/DCPUTeam;DCPU Team;False;8
-https://github.com/Lysdev;Lysdev;False;0
-https://github.com/HurricaneHackers;HurricaneHackers;False;13
-https://github.com/ncss-2013;ncss-2013;False;3
-https://github.com/galaxy-team;The Galaxy Team;False;9
-https://github.com/duckdb;DuckDB;False;10
-https://github.com/mbta;Massachusetts Bay Transportation Authority ;True;83
-https://github.com/Hand-and-Machine;Hand and Machine;False;8
-https://github.com/SSXModding;SSX Modding Community;False;11
-https://github.com/columbusrb;Columbus Ruby Brigade;False;9
-https://github.com/InnovaPartners;Innova Partners;False;3
-https://github.com/messloc;messloc;False;2
-https://github.com/RidgewayWeb;RidgewayWeb;False;2
-https://github.com/ASHEnterprizes;ASH Enterprizes LLC;False;1
-https://github.com/rust-lang;The Rust Programming Language;True;198
-https://github.com/rust-lang-nursery;rust-lang-nursery;False;24
-https://github.com/LykenSol;Lyken;True;21
-https://github.com/EmbarkStudios;Embark;True;289
-https://github.com/image-rs;image-rs;False;22
-https://github.com/LykenSol-abandoned;LykenSol-abandoned;False;3
-https://github.com/eddyb-abandoned;eddyb-abandoned;False;11
-https://github.com/rack;Official Rack repositories;False;10
-https://github.com/void-linux;VoidLinux;True;31
-https://github.com/notqmail;notqmail;False;3
-https://github.com/CrowdVoyant;CrowdVoyant;False;6
-https://github.com/UCSB-CS189-2016-17-Aerospace;UCSB-CS189-2016-17-Aerospace;False;4
-https://github.com/LambdaML;Lambda ML;False;315
-https://github.com/UPRacing;UPRacing;False;0
-https://github.com/rosedigital;ROSE Digital;False;1
-https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63
-https://github.com/openlab-aux;OpenLab Augsburg e.V.;False;85
-https://github.com/curry-club-aux;Curry Club Augsburg;False;3
-https://github.com/beetbox;beetbox;False;8
-https://github.com/lojbanistan;lojbanistan;False;2
-https://github.com/dhall-lang;Dhall;False;15
-https://github.com/robotlegs;Robotlegs;False;14
-https://github.com/snyk;Snyk;True;212
-https://github.com/eclipse;Eclipse Foundation;True;451
-https://github.com/mqtt;MQTT;False;3
-https://github.com/hackdaymanifesto;The Hack Day Manifesto;False;1
-https://github.com/makeronicc;Makeroni;False;6
-https://github.com/recursecenter;Recurse Center;False;16
-https://github.com/MetaFilter;MetaFilter;False;0
-https://github.com/bookwyrm-social;BookWyrm;False;3
-https://github.com/apc-io;APC;False;52
-https://github.com/codexa;Codexa;False;10
-https://github.com/skilljar;Skilljar;False;2
-https://github.com/airbornio;Airborn;False;12
-https://github.com/sailfish-oneplus6;sailfish-oneplus6;False;22
-https://github.com/tent;Tent;False;61
-https://github.com/emqx;EMQ Technologies;False;236
-https://github.com/Agda-zh;Agda 中文文档;False;4
-https://github.com/ZHaskell;Z.Haskell;False;31
-https://github.com/hstreamdb;HStreamDB;False;43
-https://github.com/lambda-magic;λ Magic;False;6
-https://github.com/Windows-XAML;Windows XAML;False;8
-https://github.com/openmrs;OpenMRS;True;314
-https://github.com/propershark;Proper Shark;False;17
-https://github.com/GSA;U.S. General Services Administration;False;969
-https://github.com/GSA-TTS;Technology Transformation Services;False;37
-https://github.com/processing;Processing Foundation;False;39
-https://github.com/w3c;World Wide Web Consortium;True;1010
-https://github.com/persian-computing;Persian Computing;False;12
-https://github.com/servo;Servo;True;183
-https://github.com/unicode-org;The Unicode Consortium;False;41
-https://github.com/VirguleType;Virgule Typeworks;False;0
-https://github.com/harfbuzz;HarfBuzz;False;13
-https://github.com/open-i18n;open-i18n — Open Internationalization Initiative;False;12
-https://github.com/Menlo-Community;Menlo Community;False;1
-https://github.com/freckle;Freckle;False;104
-https://github.com/eqbeats;EqBeats;False;2
-https://github.com/tamucybersec;tamucybersec;False;10
-https://github.com/recursecenter;Recurse Center;False;16
-https://github.com/sveltejs;Svelte;True;70
-https://github.com/svelte-add;Svelte Add;False;17
-https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63
-https://github.com/rust-lang;The Rust Programming Language;True;198
-https://github.com/irdest;Irdest;False;1
-https://github.com/recursecenter;Recurse Center;False;16
-https://github.com/alumNY;hackNY alumNY;False;4
-https://github.com/hack4impact-upenn;Hack4Impact UPenn;False;65
-https://github.com/asdf-community;asdf-community;False;63
-https://github.com/pytent;The Python Tent Group;False;2
-https://github.com/TheOpenSpaceProgram;Open Space Program;False;6
-https://github.com/hyphen-hacks;Hyphen-Hacks;False;13
-https://github.com/FlightClubAerospace;FlightClubAerospace;False;3
-https://github.com/Pocket;Pocket;False;71
-https://github.com/alumNY;hackNY alumNY;False;4
-https://github.com/wolfbox;wolfbox;False;15
-https://github.com/ventureforamerica;Venture for America;False;1
-https://github.com/classtracks;ClassTracks;False;4
-https://github.com/open-source-labs;OSLabs;False;25
-https://github.com/haskell;Haskell;False;88
-https://github.com/Queertoo;Queertoo Community;False;1
-https://github.com/haskell-effectful;haskell-effectful;False;10
-https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63
-https://github.com/BoofPC;Booth CS;False;8
-https://github.com/frc3223;ROCK 3223;False;38
-https://github.com/Project-M-CC;Project M Community Complete;False;5
-https://github.com/xmoto;xmoto;False;3
-https://github.com/remacs;Remacs;False;2
-https://github.com/catgirl-v;catgirl-v;False;2
-https://github.com/Random-People;Random People;False;16
-https://github.com/racket;Racket;True;126
-https://github.com/UCSFMemoryAndAging;UCSF Memory and Aging Center;False;5
-https://github.com/spendright;spendright;False;9
-https://github.com/raumzeitlabor;RaumZeitLabor;True;118
-https://github.com/curry-club-aux;Curry Club Augsburg;False;3
-https://github.com/collaborare;collaborare;False;3
-https://github.com/lojbanistan;lojbanistan;False;2
-https://github.com/fnordcredit;Fnordcredit;False;5
-https://github.com/NetBSD;The NetBSD Foundation;True;7
-https://github.com/Spotifyd;Spotifyd;False;4
-https://github.com/zors-engine;ZORS Engine;False;1
-https://github.com/env-logger-rs;env-logger-rs;False;0
-https://github.com/conventional-commits-rs;conventional-commits-rs;False;9
-https://github.com/vanilla-friendly-datapacks;Vanilla Friendly Datapacks;False;0
-https://github.com/catppuccin;Catppuccin;True;216
-https://github.com/galah-group;Galah Group;False;7
-https://github.com/thelounge;The Lounge;True;12
-https://github.com/OSULUG;Oregon State Linux Users Group;False;8
-https://github.com/veekun;veekun;False;6
-https://github.com/osucloudcrypto;OSU Cloud Crypto;False;1
-https://github.com/react-bootstrap;react-bootstrap;False;17
-https://github.com/openrightsgroup;Open Rights Group;False;31
-https://github.com/HackSoc;HackSoc;True;26
-https://github.com/sirpent-team;The Sirpent Project;False;7
-https://github.com/46bit-users;46bit-users;False;0
-https://github.com/slatl;STAR Labs;False;1
-https://github.com/Turfjs;turf;False;35
-https://github.com/Hunter-Open-Source-Club;Hunter Open Source Club;True;17
-https://github.com/HackGuild;HackGuild;False;1
-https://github.com/Web-Dev-Speedrunners;Web Dev Speed Run Any% Glitchless;False;10
-https://github.com/haskell-paris;haskell-paris;False;4
-https://github.com/rack;Official Rack repositories;False;10
-https://github.com/void-linux;VoidLinux;True;31
-https://github.com/notqmail;notqmail;False;3
-https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63
-https://github.com/BoofPC;Booth CS;False;8
-https://github.com/frc3223;ROCK 3223;False;38
-https://github.com/Project-M-CC;Project M Community Complete;False;5
-https://github.com/xmoto;xmoto;False;3
-https://github.com/remacs;Remacs;False;2
-https://github.com/catgirl-v;catgirl-v;False;2
-https://github.com/Random-People;Random People;False;16
-https://github.com/python-telegram-bot;python-telegram-bot;True;10
-https://github.com/NKPy;NKPy;False;1
-https://github.com/harmonyland;Harmony;False;6
-https://github.com/SwiftSimpers;Swift Simpers;False;8
-https://github.com/purity-ext;Purity;False;2
-https://github.com/Ekonomi-moe;Ekonomi-moe;False;5
-https://github.com/anjaraeu;Anjara;True;10
-https://github.com/akmey;Akmey;True;8
-https://github.com/FRC1076;FRC1076 PiHi Samurai;False;56
-https://github.com/HiddenNoMore;HiddenNoMore;False;1
-https://github.com/gdg-cloud-stockholm;Google Developer Group Cloud Stockholm;False;1
-https://github.com/SalineSingularityFRC;Saline Singularity;False;44
-https://github.com/slashlostfound;/lost+found/;False;6
-https://github.com/pathccm;Path;False;1
-https://github.com/TheCodeLab;Code Lab;False;4
-https://github.com/kiberpipa;Kiberpipa;False;23
-https://github.com/eestec;EESTEC;False;5
-https://github.com/rcos;Rensselaer Center for Open Source;False;66
-https://github.com/YACS-RCOS;YACS;False;42
-https://github.com/Wright-Language-Developers;Wright Language;False;10
-https://github.com/TampaHackerspace;Tampa Hackerspace;False;25
-https://github.com/WGU-CCDC;WGU Cybersecurity Club;False;4
-https://github.com/UCF-Coding-Boot-Camp;UCF Coding Bootcamp;False;3
-https://github.com/WGU-Cybersecurity-Club;WGU Cybersecurity Club;False;3
-https://github.com/WWXD;WWXD;False;8
-https://github.com/geeknight-march-2021;geeknight-march-2021;False;5
-https://github.com/The-Baltimore-Transgender-Alliance;The Baltimore Transgender Alliance;False;2
-https://github.com/openlectures;The Bell Curve God;False;17
-https://github.com/The-Property-Estimators;The-Property-Estimators;False;1
-https://github.com/ufosc;UF Open Source Club;False;51
+url;name;isVerified;repositories;membersWithRole;members
+https://github.com/mewna;Mewna;True;18;1;1
+https://github.com/bots-gg;bots.gg;False;3;14;1
+https://github.com/massdriver-cloud;Massdriver, Inc.;False;91;1;1
+https://github.com/resque;Resque;False;9;17;1
+https://github.com/pedestal;Pedestal;False;7;14;1
+https://github.com/spreadshirt;Spreadshirt;False;40;2;1
+https://github.com/codegirls;codegirls;False;13;3;1
+https://github.com/pixie-lang;pixie-lang;False;6;3;1
+https://github.com/heartheartheart;The <3<3<3 collective;False;2;3;1
+https://github.com/partkeepr;PartKeepr;True;27;3;1
+https://github.com/codekuma;Code Kuma;False;2;3;1
+https://github.com/mdx-js;mdx-js;True;13;15;1
+https://github.com/haskell-paris;haskell-paris;False;4;2;1
+https://github.com/uwa;The University of Western Australia;False;0;1;1
+https://github.com/SoutHACKton;SoutHACKton;False;4;10;1
+https://github.com/IBM;International Business Machines;True;2844;2890;1
+https://github.com/somakeit;So Make It;False;51;7;1
+https://github.com/lapoissonnerie;La poissonnerie;False;0;2;1
+https://github.com/Day-One-Engagement-Competences;Day One;False;0;1;1
+https://github.com/themanaworld;The Mana World;True;26;10;2
+https://github.com/dogbin;dogbin;False;7;1;1
+https://github.com/openrightsgroup;Open Rights Group;False;31;13;1
+https://github.com/elixir-lang;The Elixir programming language;False;10;15;1
+https://github.com/Code-and-Coffee-YVR;Code & Coffee;False;8;5;1
+https://github.com/robot-overlord;Robot Overlord Software Inc.;False;2;2;1
+https://github.com/YVRDev;YVRDev;False;5;2;1
+https://github.com/vanfp;Vancouver Functional Programming Meetup;False;3;2;1
+https://github.com/cambiecollective;Cambie Collective;False;5;3;1
+https://github.com/spadebuilders;SPADE;False;19;3;1
+https://github.com/fission-codes;Fission;True;116;7;1
+https://github.com/ethereum-specification;Ethereum Specification;False;1;3;1
+https://github.com/witchcrafters;Witchcraft Suite;False;6;6;1
+https://github.com/ucan-wg;UCAN Working Group;False;17;8;1
+https://github.com/wnfs-wg;WNFS Working Group;False;7;5;1
+https://github.com/ipvm-wg;IPVM Working Group;False;4;1;1
+https://github.com/RhizomeDB;RhizomeDB;False;1;1;1
+https://github.com/oddsdk;ODD SDK;False;15;4;1
+https://github.com/highgroove;Big Nerd Ranch;False;34;13;1
+https://github.com/wiserstudios;Wiserstudios LLC;False;10;1;1
+https://github.com/deftinc;Deft Inc;True;18;1;1
+https://github.com/flowerworkio;Flowerwork;True;4;2;1
+https://github.com/flowerworkio-seeds;Flowerwork seeds;False;2;2;1
+https://github.com/compassx-group;CompassX Group;False;0;1;1
+https://github.com/ricochet-im;Ricochet IM;False;4;2;1
+https://github.com/GitHubBounty;GitHub Security Bug Bounty;False;0;96;1
+https://github.com/OnionScan;OnionScan;False;1;1;1
+https://github.com/OpenPriv;Open Privacy;False;2;1;1
+https://github.com/namecoin;Namecoin;False;59;4;1
+https://github.com/ThreatDetectives;ThreatDetectives;False;5;1;1
+https://github.com/nzgreens;Green Party of Aotearoa / NZ;False;5;2;1
+https://github.com/yourfirstpr;Your First PR;False;1;1;1
+https://github.com/WeAllJS;WeAllJS;False;5;5;1
+https://github.com/maintainers;Open Source Maintainers on GitHub [moved];False;3;332;1
+https://github.com/fruitfuljs;fruitful;False;2;3;1
+https://github.com/entropic-dev;Entropic;False;11;1;1
+https://github.com/mutantstandard;Mutant Standard;False;4;2;2
+https://github.com/voxpupuli;Vox Pupuli;False;297;75;1
+https://github.com/FFPiHaskell;Fortgeschrittene Funktionale Programmierung In Haskell;False;6;2;1
+https://github.com/CraftMinecraft;CMC Development;False;28;1;1
+https://github.com/SmartSimTech;SmartSimTech;False;1;1;1
+https://github.com/FlatStoneTech;FlatStone Tech;False;3;3;1
+https://github.com/FireLabsCA;FireLabs;False;0;1;1
+https://github.com/BlueHuskyStudios;Blue Husky Studios;True;72;1;1
+https://github.com/EpicGames;Epic Games;False;11;2461;1
+https://github.com/Peekeet;Peekeet Ltd;False;2;1;1
+https://github.com/inkstainblue;Ink Stain Blue;False;1;1;1
+https://github.com/geeksforsocialchange;Geeks for Social Change;False;25;5;1
+https://github.com/replicate;Replicate;False;44;9;1
+https://github.com/GenderedIntelligence;Gendered Intelligence;False;2;3;1
+https://github.com/The-White-Pube;The White Pube;False;0;2;1
+https://github.com/compliantcannabis-com;Compliant Cannabis;False;0;1;1
+https://github.com/diversityMuenchen;diversity München;False;2;2;1
+https://github.com/eu;eu;False;2;19;1
+https://github.com/kuswo;Kommunal & selbstverwaltet Wohnen;False;0;1;1
+https://github.com/quai10;Quai n°10;False;5;1;1
+https://github.com/RaccoonStudio;Raccoon Studio;False;3;1;1
+https://github.com/THISSpartans;{Hack, THIS};False;6;3;1
+https://github.com/fosbosmuenchen;Staatl. FOSBOS München;False;1;1;1
+https://github.com/squareup;Square, Inc;True;0;866;1
+https://github.com/algorhythm-electronics;AlgoRhythm Electronics;False;0;1;1
+https://github.com/fastly;Fastly;False;221;34;1
+https://github.com/NorgannasAddOns;Norganna's AddOns Pty Ltd;False;10;2;1
+https://github.com/cs690;CS 490/690 Projects;False;2;1;1
+https://github.com/usfvgl;USF Visualization and Graphics Lab (VGL);False;7;1;1
+https://github.com/usf-cs212-2016;CS 212 Software Development;False;2;1;1
+https://github.com/usf-cs360-spring2020;CS 360/560 Data Visualization;False;134;1;1
+https://github.com/usf-cs272-spring2022;CS 272 Software Development;False;23;1;1
+https://github.com/StagsCIT2016;StagsCIT2016 - PTAH org;False;1;1;1
+https://github.com/hackforchange;hackforchange;False;15;27;1
+https://github.com/HRSF89;HRSF89;False;1;1;1
+https://github.com/lefty-dev;LeftDev;False;0;2;1
+https://github.com/commIT-Group;commIT Group;False;3;2;1
+https://github.com/MISAorg;MISA;False;1;1;1
+https://github.com/steemutils;steemutils;False;1;1;1
+https://github.com/paisholeague;Pai Sho League;False;2;1;1
+https://github.com/tabletophelp;tabletophelp;False;1;1;1
+https://github.com/Collective-Intelligence;Collective Intelligence;False;6;1;1
+https://github.com/fromthefront;From the Front;False;8;1;1
+https://github.com/creativemarket;Creative Market;False;46;1;1
+https://github.com/urbanairship;Airship;False;161;6;1
+https://github.com/jazzband;Jazzband;True;74;513;1
+https://github.com/preceptor;Preceptor Educação a Distância;False;16;5;1
+https://github.com/cgauge;CustomerGauge;False;15;3;1
+https://github.com/QuiltMC;QuiltMC;True;60;30;3
+https://github.com/messloc;messloc;False;2;2;3
+https://github.com/DCPUTeam;DCPU Team;False;8;4;2
+https://github.com/Lysdev;Lysdev;False;0;2;2
+https://github.com/HurricaneHackers;HurricaneHackers;False;13;8;2
+https://github.com/ncss-2013;ncss-2013;False;3;4;2
+https://github.com/galaxy-team;The Galaxy Team;False;9;2;2
+https://github.com/duckdb;DuckDB;False;10;6;2
+https://github.com/columbusrb;Columbus Ruby Brigade;False;9;5;2
+https://github.com/InnovaPartners;Innova Partners;False;3;2;2
+https://github.com/SSXModding;SSX Modding Community;False;11;1;2
+https://github.com/SpaceySciences;UGA Small Satellite Research Lab;False;15;3;1
+https://github.com/NixOS;Nix/Nixpkgs/NixOS;True;63;734;2
+https://github.com/ArctarusLimited;Arctarus Limited;True;22;1;1
+https://github.com/StrataSource;Strata Source;False;56;30;1
+https://github.com/simplifi;Simpli.fi;True;47;5;1
+https://github.com/singularity-viewer;Singularity Viewer Team;False;8;3;1
+https://github.com/golemfoundation;Golem Foundation;True;7;3;1
+https://github.com/ValleyCraft-Dev-Team;ValleyCraft Dev Team;False;10;3;1
+https://github.com/IrisGenderTalk;「彩虹女神說性別」Iris Gender Talk;False;1;1;1
+https://github.com/mint-lgbt;mint.lgbt;True;28;2;1
+https://github.com/themintfarm;The Mint Farm;True;8;1;1
+https://github.com/bridges-anime;bridges;False;2;1;1
+https://github.com/lunasoldstuff;Luna's Old Stuff;False;35;1;1
+https://github.com/go-gitnub;GitNub;False;1;1;1
+https://github.com/getriver;River;False;3;1;1
+https://github.com/KitsuCommunity;KitsuCommunity;False;6;1;1
+https://github.com/SassDoc;SassDoc;False;16;4;1
+https://github.com/Shopify;Shopify;True;926;246;1
+https://github.com/okfn-brasil;Open Knowledge Brasil - Rede pelo Conhecimento Livre;False;112;14;1
+https://github.com/worldbank;World Bank Group;False;178;32;1
+https://github.com/InternetSemLimites;Internet Sem Limites;False;3;2;1
+https://github.com/flask-extensions;Flask Extensions;False;5;5;1
+https://github.com/moveaxlab;moveax srl;False;23;3;1
+https://github.com/together-support;together-support;False;3;3;1
+https://github.com/rednit-team;rednit;False;8;4;1
+https://github.com/stackblitz;StackBlitz;True;33;10;1
+https://github.com/ebanalyse;Ekstra Bladet;False;12;1;1
+https://github.com/pnk-sh;pnk.sh;False;13;1;1
+https://github.com/justlittlebot-com;justlittlebot.com;False;0;1;1
+https://github.com/4Soft;4Soft;False;12;6;1
+https://github.com/factorial-io;Factorial;False;106;20;1
+https://github.com/pangolinjs;Pangolin.js;True;12;1;1
+https://github.com/miyagi-dev;miyagi;False;7;1;1
+https://github.com/PHP-FFMpeg;PHP-FFMpeg;False;3;5;1
+https://github.com/Karisch;Karisch IT Services;False;9;1;1
+https://github.com/comPHPiler;comPHPiler;False;0;1;1
+https://github.com/Bartacus;Bartacus;False;12;1;1
+https://github.com/nucleo-digital;Núcleo Digital;False;38;1;1
+https://github.com/SGDInstitute;Midwest Institute for Sexuality and Gender Diversity;False;5;1;1
+https://github.com/code4nova;Code for Northern Virginia (NoVA);False;26;6;1
+https://github.com/The-Property-Estimators;The-Property-Estimators;False;1;2;2
+https://github.com/felix-lang;Felix Programming Language;False;20;5;1
+https://github.com/integratedmarketingtechnologies;Integrated Marketing Technologies;False;2;1;1
+https://github.com/iTrace-Dev;iTrace-Dev;False;8;4;1
+https://github.com/anegostudios;Anego Studios;False;24;1;1
+https://github.com/PolyplexEngine;Polyplex;False;20;1;1
+https://github.com/glimpse-editor;Glimpse Image Editor;False;7;3;1
+https://github.com/CospecGames;Cospec Games;False;3;1;1
+https://github.com/KitsunebiGames;Kitsunebi;False;9;1;1
+https://github.com/Inochi2D;Inochi2D;True;40;1;1
+https://github.com/hoedown;Hoedown;False;19;2;1
+https://github.com/nodejs;Node.js;True;201;184;1
+https://github.com/botgram;Botgram;False;7;1;1
+https://github.com/Kingdom-of-The-Moon;Kingdom of The Moon ;False;24;2;1
+https://github.com/railsgirlsrj;Rails Girls RJ;False;3;5;1
+https://github.com/TechWomenOnBeer;Tech Women On Beer;False;1;1;1
+https://github.com/ProgramacaoParaTodes;Programação para Todes;False;6;1;1
+https://github.com/VoiceGym;VoiceGym;False;3;2;1
+https://github.com/scyllo-oss;Scyllo;False;1;4;1
+https://github.com/discatpy-dev;DisCatPy;False;3;1;1
+https://github.com/govhackaustralia;GovHack Australia;False;15;2;1
+https://github.com/accessible-melbourne;accessible-melbourne;False;4;1;1
+https://github.com/techinschools;techinschools;False;1;1;1
+https://github.com/Savvanah21;Savvanah21;False;0;1;1
+https://github.com/authmyproject;AuthMyProject;True;0;1;1
+https://github.com/hackclub;Hack Club;True;365;641;1
+https://github.com/PGamerX-Legacy;PGamerx Legacy;False;4;1;1
+https://github.com/Stardust-Industries;Stardust-Industries;False;6;1;1
+https://github.com/MobilePorting;Mobile Porting Team;False;15;3;1
+https://github.com/Test-Engine-Team;Test Engine;False;2;2;1
+https://github.com/ticketfrei;Ticketfrei;False;4;1;1
+https://github.com/mbta;Massachusetts Bay Transportation Authority ;True;83;7;1
+https://github.com/Hand-and-Machine;Hand and Machine;False;8;2;1
+https://github.com/RidgewayWeb;RidgewayWeb;False;2;2;1
+https://github.com/ASHEnterprizes;ASH Enterprizes LLC;False;1;1;1
+https://github.com/rack;Official Rack repositories;False;10;13;1
+https://github.com/void-linux;VoidLinux;True;31;17;1
+https://github.com/notqmail;notqmail;False;3;2;1
+https://github.com/BoofPC;Booth CS;False;8;8;1
+https://github.com/frc3223;ROCK 3223;False;38;4;1
+https://github.com/Project-M-CC;Project M Community Complete;False;5;5;1
+https://github.com/xmoto;xmoto;False;3;3;1
+https://github.com/remacs;Remacs;False;2;7;1
+https://github.com/catgirl-v;catgirl-v;False;2;2;1
+https://github.com/Random-People;Random People;False;16;7;1
+https://github.com/python-telegram-bot;python-telegram-bot;True;10;12;1
+https://github.com/NKPy;NKPy;False;1;1;1
+https://github.com/harmonyland;Harmony;False;6;6;1
+https://github.com/SwiftSimpers;Swift Simpers;False;8;1;1
+https://github.com/purity-ext;Purity;False;2;1;1
+https://github.com/Ekonomi-moe;Ekonomi-moe;False;5;2;1
+https://github.com/anjaraeu;Anjara;True;10;5;1
+https://github.com/akmey;Akmey;True;8;2;1
+https://github.com/FRC1076;FRC1076 PiHi Samurai;False;56;2;1
+https://github.com/HiddenNoMore;HiddenNoMore;False;1;1;1
+https://github.com/gdg-cloud-stockholm;Google Developer Group Cloud Stockholm;False;1;2;1
+https://github.com/SalineSingularityFRC;Saline Singularity;False;44;3;1
+https://github.com/slashlostfound;/lost+found/;False;6;1;1
+https://github.com/pathccm;Path;False;1;1;1
+https://github.com/TheCodeLab;Code Lab;False;4;2;1
+https://github.com/kiberpipa;Kiberpipa;False;23;15;1
+https://github.com/eestec;EESTEC;False;5;13;1
+https://github.com/rcos;Rensselaer Center for Open Source;False;66;19;1
+https://github.com/YACS-RCOS;YACS;False;42;10;1
+https://github.com/Wright-Language-Developers;Wright Language;False;10;1;1
+https://github.com/TampaHackerspace;Tampa Hackerspace;False;25;3;1
+https://github.com/WGU-CCDC;WGU Cybersecurity Club;False;4;2;1
+https://github.com/UCF-Coding-Boot-Camp;UCF Coding Bootcamp;False;3;17;1
+https://github.com/WGU-Cybersecurity-Club;WGU Cybersecurity Club;False;3;1;1
+https://github.com/WWXD;WWXD;False;8;2;1
+https://github.com/geeknight-march-2021;geeknight-march-2021;False;5;2;1
+https://github.com/The-Baltimore-Transgender-Alliance;The Baltimore Transgender Alliance;False;2;1;1
+https://github.com/openlectures;The Bell Curve God;False;17;7;1
+https://github.com/ufosc;UF Open Source Club;False;51;8;1
