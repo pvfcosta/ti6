@@ -24,8 +24,22 @@ allWordsResults = []
 allOrganizations = []
 membersColumn = []
 
-words = ["queer", "rainbow_flag", "transgender_flag", "nonbinary", "non binary", "lesbian",
-         "bisexual", "asexual", "pansexual", "transgender", "they them", "he them", "she them","gay"]
+words = [
+  {'keyword': "queer", 'has_filter': False}, 
+  {'keyword': "rainbow_flag", 'has_filter': False},
+  {'keyword': "transgender_flag", 'has_filter': False},
+  {'keyword': "nonbinary", 'has_filter': False},
+  {'keyword': "non binary", 'has_filter': False},
+  {'keyword': "lesbian", 'has_filter': False},
+  {'keyword':"bisexual", 'has_filter': False},
+  {'keyword': "asexual", 'has_filter': False},
+  {'keyword': "pansexual", 'has_filter': False},
+  {'keyword': "transgender", 'has_filter': False},
+  {'keyword': "they them", 'has_filter': False},
+  {'keyword': "he them", 'has_filter': False},
+  {'keyword': "she them", 'has_filter': False},
+  {'keyword': "gay", 'has_filter': True}
+  ]
 # "gay", "rainbow, "trans",
 
 query = """
@@ -126,9 +140,9 @@ i = 0
 
 today = datetime.datetime.utcnow()
 for word in words:
-    print(word)
-    query = query.replace(term, word)
-    term = word
+    keyword = word['keyword']
+    query = query.replace(term, keyword)
+    term = keyword
     if i > 0:
         query = query.replace(endCursor, "null")
     endCursor = "null"
@@ -160,22 +174,22 @@ for word in words:
             if len(user_df) > 0 and login in user_df['login'].to_list():
               print('already exists')
               continue
-
-            spaced_word = ' gay '
-            spaced_word_1 = 'gay '
-            spaced_word_2 = ' gay'
-            if status is None:
-              status = ''
-            if body is None:
-              body = ''
-            if body_html is None:
-              body_html = ''
-            body_condition = spaced_word in body or spaced_word_1 in body or spaced_word_2 in body
-            bodyHtml_condition = spaced_word in body_html or spaced_word_1 in body_html or spaced_word_2 in body_html
-            status_condition = spaced_word in status or spaced_word_1 in status or spaced_word_2 in status
-            if (word == 'gay' and  not( body_condition or bodyHtml_condition or status_condition)):
-              print('continue')
-              continue
+            if word['has_filter']:
+              spaced_word = ' ' + keyword + ' '
+              spaced_word_1 = keyword + ' '
+              spaced_word_2 = ' ' + keyword
+              if status is None:
+                status = ''
+              if body is None:
+                body = ''
+              if body_html is None:
+                body_html = ''
+              body_condition = spaced_word in body or spaced_word_1 in body or spaced_word_2 in body
+              bodyHtml_condition = spaced_word in body_html or spaced_word_1 in body_html or spaced_word_2 in body_html
+              status_condition = spaced_word in status or spaced_word_1 in status or spaced_word_2 in status
+              if not(body_condition or bodyHtml_condition or status_condition):
+                print('continue')
+                continue
 
 
             createdAt = datetime.datetime.strptime(
@@ -191,7 +205,7 @@ for word in words:
             commitsPerWeek = node['contributionsCollection']['totalCommitContributions'] / ( contributionTime.days / 7 )
 
             wordResults = {
-                'search': word,
+                'search': keyword,
                 'login': login,
                 'name': node['name'],
                 'bio': node['bio'],
