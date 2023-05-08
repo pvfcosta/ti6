@@ -13,9 +13,9 @@ client = pymongo.MongoClient(connection_string)
 mydb = client['ti-data']
 
 # colocar token aqui
-token_1 = "h6fUn0ZzrGBw2G8BwccjPbQmin1nw54gdMK8"
+token_1 = "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"
 
-token_2 = "P3gX7jsmqOK4zeG3F9nj4FgAGm1lP41JRj4R"
+token_2 = "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"
 
 token = token_1
 
@@ -38,13 +38,14 @@ words = [
   {'keyword': "they them", 'has_filter': False},
   {'keyword': "he them", 'has_filter': False},
   {'keyword': "she them", 'has_filter': False},
-  {'keyword': "gay", 'has_filter': True}
+  {'keyword': "gay", 'has_filter': True},
+  {'keyword': "trans", 'has_filter': True}
   ]
 # "gay", "rainbow, "trans",
 
 query = """
 {
-  search(query:" term in:fullName", type: USER, first: 10, after:null) {
+  search(query:"term in:fullName", type: USER, first: 10, after:null) {
     userCount
     pageInfo {
       endCursor
@@ -72,7 +73,7 @@ query = """
         issues {
           totalCount
         }
-        organizations(first: 17) {
+        organizations(first: 20) {
           totalCount
           edges {
             node {
@@ -149,7 +150,7 @@ for word in words:
     i += 1
 
     while True:
-      headers = {"Authorization": "bearer ghp_"+token}
+      headers = {"Authorization": "bearer "+token}
       try:
         request = requests.post('https://api.github.com/graphql',
                                 json={'query': query}, headers=headers)
@@ -178,6 +179,7 @@ for word in words:
               spaced_word = ' ' + keyword + ' '
               spaced_word_1 = keyword + ' '
               spaced_word_2 = ' ' + keyword
+              print(spaced_word)
               if status is None:
                 status = ''
               if body is None:
