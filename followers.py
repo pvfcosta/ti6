@@ -14,7 +14,6 @@ GITHUB_API_ENDPOINT = "https://api.github.com/graphql"
 NUMBER_OF_ATTEMPTS = 15
 
 # colocar token aqui
-token = "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"
 
 CURSOR_QUERY = """
 query($login:String!,$cursor:String!)
@@ -67,6 +66,12 @@ else:
 
 def run_query_variables(query, attemp, variables):
 
+        token_1 = "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"
+
+        token_2 = "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"
+
+        token = token_1
+
         headers = {"Authorization": "Bearer " + token}
 
         request = requests.post(GITHUB_API_ENDPOINT, headers=headers, json={"query": query, "variables": variables})
@@ -74,10 +79,14 @@ def run_query_variables(query, attemp, variables):
         if request.status_code == 200:
             return request.json()
         elif attemp <= NUMBER_OF_ATTEMPTS:
-            print("Tentativa de conexão falhou :(. {}/{} Tentando novamente...".format(attemp,
-                  NUMBER_OF_ATTEMPTS))
-            #sleep(1)
-            return run_query_variables(query, attemp + 1, variables)
+          if token == token_1:
+            token = token_2
+          else:
+            token = token_1
+          print("Tentativa de conexão falhou :(. {}/{} Tentando novamente...".format(attemp,
+                NUMBER_OF_ATTEMPTS))
+          sleep(1)
+          return run_query_variables(query, attemp + 1, variables)
         else:
             raise Exception("Tentativa de conexão falhou com o erro: {}. {}".format(
                 request.status_code, query))
@@ -137,7 +146,7 @@ def fetch_followers(login):
 
     save_followers(login, follows)
 
-cursor = user_conn_collection.find({})    
+cursor = user_conn_collection.find()    
 
 for document in cursor:
     login = document['login']
