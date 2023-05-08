@@ -39,7 +39,11 @@ words = [
   {'keyword': "he them", 'has_filter': False},
   {'keyword': "she them", 'has_filter': False},
   {'keyword': "gay", 'has_filter': True},
-  {'keyword': "trans", 'has_filter': True}
+  {'keyword': "trans", 'has_filter': True},
+  {'keyword': "transboy", 'has_filter': False},
+  {'keyword': "transgirl", 'has_filter': False},
+  {'keyword': "transwoman", 'has_filter': False},
+  {'keyword': "transmen", 'has_filter': False},
   ]
 # "gay", "rainbow, "trans",
 
