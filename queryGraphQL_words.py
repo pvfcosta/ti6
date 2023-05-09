@@ -12,6 +12,7 @@ allResults = []
 allWordsResults = []
 allOrganizations = []
 membersColumn = []
+allLanguages = {}
 
 words = ["queer", "rainbow_flag", "transgender_flag", "nonbinary", "non binary", "lesbian",
          "bisexual", "asexual", "pansexual", "transgender", "they them", "he them", "she them"]
@@ -85,6 +86,30 @@ query = """
   }
 }
 """
+query_language = """
+{
+  user(login: "userlogin") {
+    contributionsCollection {
+      pullRequestContributions(first: 100) {
+        pageInfo {
+          endCursor
+          startCursor
+        }
+        nodes {
+          pullRequest {
+            files(first: 100) {
+              nodes {
+                path
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
 term = "term"
 
 error = 0
@@ -141,7 +166,8 @@ for word in words:
                 wordResults['createdAt'].append(node['createdAt'])
                 wordResults['location'].append(node['location'])
                 wordResults['status'].append(node['status'])
-                wordResults['pullRequests'].append(node['pullRequests']['totalCount'])
+                wordResults['pullRequests'].append(
+                    node['pullRequests']['totalCount'])
                 wordResults['issues'].append(node['issues']['totalCount'])
                 wordResults['organizations'].append(
                     node['organizations']['totalCount'])
@@ -155,10 +181,13 @@ for word in words:
                     node['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
                 accountAgeInDays = today - createdAt
                 wordResults['accountAge'].append(accountAgeInDays.days)
-                wordResults['followers'].append(node['followers']['totalCount'])
-                wordResults['following'].append(node['following']['totalCount'])
+                wordResults['followers'].append(
+                    node['followers']['totalCount'])
+                wordResults['following'].append(
+                    node['following']['totalCount'])
                 wordResults['sponsors'].append(node['sponsors']['totalCount'])
-                wordResults['sponsoring'].append(node['sponsoring']['totalCount'])
+                wordResults['sponsoring'].append(
+                    node['sponsoring']['totalCount'])
 
                 # calcula frequencia de commits
                 commitsStartedAt = datetime.datetime.strptime(
@@ -166,21 +195,42 @@ for word in words:
                 commitsEndedAt = datetime.datetime.strptime(
                     node['contributionsCollection']['endedAt'], '%Y-%m-%dT%H:%M:%SZ')
                 contributionTime = commitsEndedAt - commitsStartedAt
-                commitsPerWeek = node['contributionsCollection']['totalCommitContributions'] / ( contributionTime.days / 7 )
+                commitsPerWeek = node['contributionsCollection']['totalCommitContributions'] / (
+                    contributionTime.days / 7)
                 wordResults['commitsPerWeek'].append(commitsPerWeek)
-               
+
                 # itera sobre organizacoes dos usuarios
                 for org in node['organizations']['edges']:
                     if org['node'] is not None:
-                        org['node']['repositories'] = org['node']['repositories']['totalCount']   
-                        org['node']['membersWithRole'] = org['node']['membersWithRole']['totalCount']                    
+                        org['node']['repositories'] = org['node']['repositories']['totalCount']
+                        org['node']['membersWithRole'] = org['node']['membersWithRole']['totalCount']
                         if org['node'] in allOrganizations:
                             indice = allOrganizations.index(org['node'])
-                            membersColumn[indice] += 1 
+                            membersColumn[indice] += 1
                         else:
                             allOrganizations.append(org['node'])
                             membersColumn.append(1)
-          
+
+                # busca lingaguens utilizadas
+                # endCursorLanguage = "null"
+                # while True:
+                query_language = query_language.replace("userlogin",
+                                                        node['login'])
+                request = requests.post('https://api.github.com/graphql',
+                                        json={'query': query_language}, headers=headers)
+                resultLanguage = request.json()
+                if 'data' in resultLanguage and resultLanguage['data'] is not None:
+                    allPrs = resultLanguage['data']['user']['contributionsCollection']['pullRequestContributions']['nodes']
+                    for pr in allPrs:
+                        prfiles = pr['pullRequest']['files']['nodes']
+                        for file in prfiles:
+                            if len(file['path'].split(".")) > 1:
+                              extension = file['path'].split(".")[1]
+                              if extension not in allLanguages:
+                                  allLanguages[extension] = 1
+                              else:
+                                  allLanguages[extension] = allLanguages[extension] + 1
+
             print(result['data']['search']['pageInfo']['endCursor'])
             if result['data']['search']['pageInfo']['endCursor'] == None:
                 break
@@ -205,14 +255,17 @@ dfOrgs = pd.DataFrame(allOrganizations)
 
 dfOrgs.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
 
+dfLanguages = pd.DataFrame(allLanguages)
+dfLanguages.to_csv('languages.csv', index=False, sep=';', encoding='utf-8')
+
 df = pd.read_csv('organizations.csv', sep=";")
 teste_concat = pd.concat([df, members], axis=1)
-teste_concat.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
+teste_concat.to_csv('organizations.csv', index=False,
+                    sep=';', encoding='utf-8')
 
 with pd.ExcelWriter('users.xlsx', engine='xlsxwriter') as writer:
     for wordResults in allWordsResults:
         dfWord = pd.DataFrame(wordResults)
         if len(wordResults['search']) > 0:
-          dfWord.to_excel(
-              writer, sheet_name=wordResults['search'][0], index=False)
-
+            dfWord.to_excel(
+                writer, sheet_name=wordResults['search'][0], index=False)
