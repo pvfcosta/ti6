@@ -21,7 +21,7 @@ token = token_1
 
 allResults = []
 allWordsResults = []
-allOrganizations = []
+allRepositories = []
 membersColumn = []
 
 words = [
@@ -77,19 +77,49 @@ query = """
         issues {
           totalCount
         }
-        organizations(first: 20) {
+        repositories(first: 5, after: null) {
           totalCount
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
           edges {
             node {
-              url
               name
-              isVerified
-              repositories(first: 1, privacy: PUBLIC) {
-                totalCount
+              createdAt
+              stargazers { 
+                totalCount 
               }
-              membersWithRole {
-                totalCount
+              primaryLanguage {
+                name
               }
+              defaultBranchRef {
+                target {
+                  ... on Commit {
+                    history(first: 1) {
+                      edges {
+                        node {
+                          authoredDate
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              totalIssues: issues { 
+                totalCount 
+              }
+            	closedIssues: issues(states: CLOSED) { 
+                totalCount 
+              }
+              owner {
+                __typename
+                ... on Organization {
+                  membersWithRole {
+                    totalCount
+                  }
+                }
+              }         
             }
           }
         }
@@ -117,12 +147,13 @@ query = """
 """
 org_collection = "organizations"
 user_collection = "users"
+repo_collection = "repositories"
 
-if org_collection in mydb.list_collection_names():
+if repo_collection in mydb.list_collection_names():
   print("The collection exists.")
-  org_conn_collection = mydb[org_collection]
+  repo_conn_collection = mydb[repo_collection]
 else:
-  org_conn_collection = mydb.create_collection(org_collection)
+  repo_conn_collection = mydb.create_collection(repo_collection)
 
 if user_collection in mydb.list_collection_names():
   print("The collection exists.")
@@ -132,11 +163,14 @@ else:
 
 user_cursor = user_conn_collection.find()
 
-org_cursor = org_conn_collection.find()
+repo_cursor = repo_conn_collection.find()
 
 user_df = pd.DataFrame(list(user_cursor))
 
-org_df = pd.DataFrame(list(org_cursor))
+repo_df = pd.DataFrame(list(repo_cursor))
+
+#org_cursor = org_conn_collection.find()
+#org_df = pd.DataFrame(list(org_cursor))
 
 term = "term"
 
@@ -174,7 +208,7 @@ for word in words:
             body = node['bio']
             body_html = node['bioHTML']
             status = node['status']
-            org_total_count = node['organizations']['totalCount']
+            repo_total_count = node['repositories']['totalCount']
 
             if len(user_df) > 0 and login in user_df['login'].to_list():
               print('already exists')
@@ -220,11 +254,11 @@ for word in words:
                 'pronouns': node['pronouns'],
                 'createdAt': createdAt,
                 'status': node['status'],
-                'organizations': node['organizations']['totalCount'],
+                'repositories': node['repositories']['totalCount'],
                 'location': node['location'],
                 'pullRequests':node['pullRequests']['totalCount'],
                 'issues':node['issues']['totalCount'],
-                'organizations':org_total_count,
+                'repositories':repo_total_count,
                 'totalCommitContributions':node['contributionsCollection']['totalCommitContributions'],
                 'commitsStartedAt':node['contributionsCollection']['startedAt'],
                 'commitsEndedAt':node['contributionsCollection']['endedAt'],
@@ -235,22 +269,48 @@ for word in words:
                 'sponsoring':node['sponsoring']['totalCount'],
                 'commitsPerWeek':commitsPerWeek
             }
-              # itera sobre organizacoes dos usuarios
+              # itera sobre os repositórios dos usuarios
             for org in node['organizations']['edges']:
                   if org['node'] is not None:
-                      org['node']['repositories'] = org['node']['repositories']['totalCount']   
-                      org['node']['membersWithRole'] = org['node']['membersWithRole']['totalCount']                    
-                      if org['node'] in allOrganizations:
-                          indice = allOrganizations.index(org['node'])
-                          membersColumn[indice] += 1 
+                      org['node']['stargazers'] = org['node']['stargazers']['totalCount']   
+                      org['node']['totalIssues'] = org['node']['totalIssues']['totalCount']
+                      org['node']['closedIssues'] = org['node']['closedIssues']['totalCount'] 
+                      
+                      if org['node']['primaryLanguage'] is not None:
+                        org['node']['primaryLanguage'] = org['node']['primaryLanguage']['name']
                       else:
-                          allOrganizations.append(org['node'])
-                          membersColumn.append(1)
-                          
+                        org['node']['primaryLanguage'] = 'NA' 
+
+                      if org['node']['defaultBranchRef'] is not None:
+                        target = org['node']['defaultBranchRef'].get('target')
+                        history = target.get('history')         
+                        if target is not None and history is not None and history['edges']:
+                           org['node']['defaultBranchRef'] = history['edges'][0]['node']['authoredDate']
+                        else:
+                           org['node']['defaultBranchRef'] = None
+                      else:
+                        org['node']['defaultBranchRef'] = None
+
+                      if org['node']['owner']['__typename'] == 'Organization':
+                        org['node']['owner']['membersWithRole'] = org['node']['owner']['membersWithRole']['totalCount']        
+                        org['node']['owner'] = org['node']['owner']['__typename']                   
+                      else:
+                        org['node']['owner'] = org['node']['owner']['__typename']   
+                      
+                      allRepositories.append(org['node'])    
+                        
+            #print(node['repositories']['pageInfo']['endCursor'])
+            if node['repositories']['pageInfo']['endCursor'] == None:
+              break
+            query = query.replace(endCursor, '"'+node['repositories']
+                ['pageInfo']['endCursor']+'"')
+            endCursor = '"' + \
+                node['repositories']['pageInfo']['endCursor']+'"'   
+                                  
             user_conn_collection.insert_one(wordResults)
-            if int(org_total_count) > 0:
-              org_conn_collection.insert_many(allOrganizations)
-              allOrganizations = []
+            if int(repo_total_count) > 0:
+              repo_conn_collection.insert_many(allRepositories)
+              allRepositories = []
 
           print(result['data']['search']['pageInfo']['endCursor'])
           if result['data']['search']['pageInfo']['endCursor'] == None:
