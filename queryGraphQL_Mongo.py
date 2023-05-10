@@ -13,11 +13,11 @@ client = pymongo.MongoClient(connection_string)
 mydb = client['ti-data']
 
 # colocar token aqui
-token_1 = "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"
+token_1 = "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"
 
-token_2 = "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"
+token_2 = "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"
 
-token = token_1
+token = token_2
 
 allResults = []
 allWordsResults = []
@@ -86,6 +86,7 @@ query = """
           edges {
             node {
               name
+              url
               createdAt
               stargazers { 
                 totalCount 
@@ -97,9 +98,10 @@ query = """
                 target {
                   ... on Commit {
                     history(first: 1) {
+                      totalCount
                       edges {
                         node {
-                          authoredDate
+                          committedDate
                         }
                       }
                     }
@@ -254,7 +256,7 @@ for word in words:
                 'pronouns': node['pronouns'],
                 'createdAt': createdAt,
                 'status': node['status'],
-                'repositories': node['repositories']['totalCount'],
+                #'repositories': node['repositories']['totalCount'],
                 'location': node['location'],
                 'pullRequests':node['pullRequests']['totalCount'],
                 'issues':node['issues']['totalCount'],
@@ -269,37 +271,45 @@ for word in words:
                 'sponsoring':node['sponsoring']['totalCount'],
                 'commitsPerWeek':commitsPerWeek
             }
-              # itera sobre os repositórios dos usuarios
-            for org in node['organizations']['edges']:
+
+            # itera sobre os repositórios dos usuarios
+            for org in node['repositories']['edges']:
                   if org['node'] is not None:
                       org['node']['stargazers'] = org['node']['stargazers']['totalCount']   
                       org['node']['totalIssues'] = org['node']['totalIssues']['totalCount']
                       org['node']['closedIssues'] = org['node']['closedIssues']['totalCount'] 
                       
+                       # linguagem do repositório 
                       if org['node']['primaryLanguage'] is not None:
                         org['node']['primaryLanguage'] = org['node']['primaryLanguage']['name']
                       else:
                         org['node']['primaryLanguage'] = 'NA' 
 
+                      # data do commit e total de commit do usuário
                       if org['node']['defaultBranchRef'] is not None:
                         target = org['node']['defaultBranchRef'].get('target')
                         history = target.get('history')         
                         if target is not None and history is not None and history['edges']:
-                           org['node']['defaultBranchRef'] = history['edges'][0]['node']['authoredDate']
+                           org['node']['defaultBranchRef'] = {
+                              'totalCount': history['totalCount'],
+                              'committedDate ': history['edges'][0]['node']['committedDate']
+                            }
                         else:
                            org['node']['defaultBranchRef'] = None
                       else:
                         org['node']['defaultBranchRef'] = None
 
+                      # se o repositório é uma organização ou não, caso sim, obtem a quantidade de membros
                       if org['node']['owner']['__typename'] == 'Organization':
-                        org['node']['owner']['membersWithRole'] = org['node']['owner']['membersWithRole']['totalCount']        
-                        org['node']['owner'] = org['node']['owner']['__typename']                   
+                        org['node']['owner'] = {
+                              'membersWithRole': org['node']['owner']['membersWithRole']['totalCount'] ,
+                              'owner ': org['node']['owner']['__typename']
+                            }              
                       else:
                         org['node']['owner'] = org['node']['owner']['__typename']   
                       
                       allRepositories.append(org['node'])    
                         
-            #print(node['repositories']['pageInfo']['endCursor'])
             if node['repositories']['pageInfo']['endCursor'] == None:
               break
             query = query.replace(endCursor, '"'+node['repositories']
@@ -312,7 +322,7 @@ for word in words:
               repo_conn_collection.insert_many(allRepositories)
               allRepositories = []
 
-          print(result['data']['search']['pageInfo']['endCursor'])
+          #print(result['data']['search']['pageInfo']['endCursor'])
           if result['data']['search']['pageInfo']['endCursor'] == None:
               break
           query = query.replace(endCursor, '"'+result['data']
