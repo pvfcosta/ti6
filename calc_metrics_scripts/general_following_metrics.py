@@ -18,22 +18,18 @@ if user_collection in mydb.list_collection_names():
 else:
     print("The collection doesn't exist.")
 
-cursor = user_conn_collection.find({})
+cursor = user_conn_collection.find()
 
-follow =  [{'followers': int(doc["followers"]), 'following': int(doc["following"]) } for doc in cursor]
+df = pd.DataFrame(list(cursor))
 
-lista_followers = [obj['followers'] for obj in follow]
-lista_following = [obj['following'] for obj in follow]
+follow =  df[['followers', 'following']]
 
-df_followers = pd.DataFrame({'followers': lista_followers})
-df_following = pd.DataFrame({'following': lista_following})
-
-sns.boxplot(x=df_followers['followers'])
+sns.boxplot(x=df['followers'])
 plot.title("Número de followers")
 plot.savefig("followers.png")
 
 plot.clf()
 
-sns.boxplot(x=df_following['following'])
+sns.boxplot(x=df['following'])
 plot.title("Número de following")
 plot.savefig("following.png")
