@@ -31,19 +31,22 @@ if metrics_collection in mydb.list_collection_names():
 else:
   metrics_conn_collection = mydb.create_collection(metrics_collection)
 
-user_docs = user_conn_collection.find({}, {"login":1})
-foll_docs = foll_conn_collection.find({})
+user_docs = user_conn_collection.find({},{"login":1})
+foll_docs = foll_conn_collection.find()
 
-users = [user["login"] for user in user_docs]
+df_foll = pd.DataFrame(list(foll_docs))
+
+users = pd.DataFrame(list(user_docs))
 metrics = []
+logins = users['login'].tolist();
 
-for user in users:
-    data = []
-    
-    comm_followed = [doc for doc in foll_docs if doc['following'] == user and doc['followed'] in users]
-    comm_following = [doc for doc in foll_docs if doc['followed'] == user and doc['following'] in users]
+for login in logins:
+    mask_followed = ((df_foll['following'] == login) & df_foll['followed'].isin(logins))
+    mask_following = ((df_foll['followed'] == login) & df_foll['following'].isin(logins))
+    comm_followed = df_foll[mask_followed]
+    comm_following = df_foll[mask_following]
     metric = {
-        "login": user,
+        "login": login,
         "comm_followed": len(comm_followed),
         "comm_following": len(comm_following)
     }

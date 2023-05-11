@@ -13,27 +13,40 @@ mydb = client['ti-data']
 
 user_collection = "users"
 
+follow_metrics_collection = "follow_metrics"
+
 if user_collection in mydb.list_collection_names():
   user_conn_collection = mydb[user_collection]
 else:
     print("The collection doesn't exist.")
 
-cursor = user_conn_collection.find({})
+if follow_metrics_collection in mydb.list_collection_names():
+  follow_metrics_conn_collection = mydb[follow_metrics_collection]
+else:
+    print("The collection doesn't exist.")
 
-follow =  [{'followers': int(doc["followers"]), 'following': int(doc["following"]) } for doc in cursor]
+cursor = user_conn_collection.find()
 
-lista_followers = [obj['followers'] for obj in follow]
-lista_following = [obj['following'] for obj in follow]
+follow_cursor = follow_metrics_conn_collection.find()
 
-df_followers = pd.DataFrame({'followers': lista_followers})
-df_following = pd.DataFrame({'following': lista_following})
+df = pd.DataFrame(list(cursor))
 
-sns.boxplot(x=df_followers['followers'])
+df_follow = pd.DataFrame(list(follow_cursor))
+
+follow =  df[['followers', 'following']]
+
+sns.boxplot(x=df['followers'])
 plot.title("Número de followers")
 plot.savefig("followers.png")
 
 plot.clf()
 
-sns.boxplot(x=df_following['following'])
+sns.boxplot(x=df['following'])
 plot.title("Número de following")
 plot.savefig("following.png")
+
+plot.clf()
+
+sns.boxplot(data=df_follow[['comm_followed','comm_following']], orient='v')
+plot.title("Número de Seguidores e Seguides em Comum")
+plot.savefig("common_following.png")
