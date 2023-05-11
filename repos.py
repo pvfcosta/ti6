@@ -24,6 +24,7 @@ query($login:String!,$cursor:String!)
   user(login: $login) {
     repositories(first: 50, after:$cursor) {
       nodes {
+        nameWithOwner
         createdAt
         stargazerCount
         primaryLanguage {
@@ -72,8 +73,9 @@ INITIAL_QUERY = """
 query($login:String!)
 {
  user(login: $login) {
-    repositories(first: 10, after:null) {
+    repositories(first: 50, after:null) {
       nodes {
+        nameWithOwner
         createdAt
         stargazerCount
         primaryLanguage {
@@ -157,49 +159,59 @@ def run_query_variables(query, attemp, variables):
           request.status_code, query))
 
 def save_repos(login, repos, today):
-    for repo in repos:
-        print(repo)
-        
-        if repo['owner']:
-            org_name = repo['owner']['name']
-            org_member = repo['owner']['membersWithRole']['totalCount']
-        else:
-            org_name = None
-            org_member = None
 
-        created_at = datetime.datetime.strptime(
-                  repo['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
+  repo_cursor = repo_conn_collection.find({'user': login})
+  repo_df = pd.DataFrame(list(repo_cursor))
+  if len(repo_df) > 0:
+    repos_name = repo_df['repo_name']
+  else:
+    repos_name = []
 
-        accountAgeInDays = today - created_at
+  for repo in repos:
+    if repo['nameWithOwner'] in list(repos_name):
+      print('pula repo')
+      continue
+    
+    if repo['owner']:
+        org_name = repo['owner']['name']
+        org_member = repo['owner']['membersWithRole']['totalCount']
+    else:
+        org_name = None
+        org_member = None
 
-        if repo['totalCommitCount']:
-            commit_total_count = repo['totalCommitCount']['target']['history']['totalCount']
-            last_commit = datetime.datetime.strptime(
-                    repo['totalCommitCount']['target']['history']['nodes'][0]['committedDate'] , '%Y-%m-%dT%H:%M:%SZ')
-        else:
-            commit_total_count = None
-            last_commit = None
+    created_at = datetime.datetime.strptime(
+              repo['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
 
-        if repo['primaryLanguage']:
-            language = repo['primaryLanguage']['name']
-        else:
-            language = None
+    accountAgeInDays = today - created_at
+    if repo['totalCommitCount']:
+        commit_total_count = repo['totalCommitCount']['target']['history']['totalCount']
+        last_commit = datetime.datetime.strptime(
+                repo['totalCommitCount']['target']['history']['nodes'][0]['committedDate'] , '%Y-%m-%dT%H:%M:%SZ')
+    else:
+        commit_total_count = None
+        last_commit = None
 
-        repository = {
-            "user": login,
-            "created_at": created_at,
-            "age_years": accountAgeInDays.total_seconds()/(3600*24*365),
-            "stars": repo['stargazerCount'],
-            'language': language,
-            'total_issues': repo['totalIssues']['totalCount'],
-            'closed_issues': repo['closedIssues']['totalCount'],
-            'pull_requests': repo['pullRequests']['totalCount'],
-            'organization_name': org_name,
-            'organization_members': org_member,
-            'total_commits': commit_total_count,
-            'last_commit':  last_commit
-        }
-        repo_conn_collection.insert_one(repository)
+    if repo['primaryLanguage']:
+        language = repo['primaryLanguage']['name']
+    else:
+        language = None
+
+    repository = {
+        "user": login,
+        "repo_name": repo['nameWithOwner'],
+        "created_at": created_at,
+        "age_years": accountAgeInDays.total_seconds()/(3600*24*365),
+        "stars": repo['stargazerCount'],
+        'language': language,
+        'total_issues': repo['totalIssues']['totalCount'],
+        'closed_issues': repo['closedIssues']['totalCount'],
+        'pull_requests': repo['pullRequests']['totalCount'],
+        'organization_name': org_name,
+        'organization_members': org_member,
+        'total_commits': commit_total_count,
+        'last_commit':  last_commit
+    }
+    repo_conn_collection.insert_one(repository)
 
 
 def fetch_repositories(login):
@@ -212,6 +224,9 @@ def fetch_repositories(login):
     query = INITIAL_QUERY
 
     response = run_query_variables(query, 1, variables)
+
+    while 'errors' in response:
+      response = run_query_variables(query, 1, variables)
 
     repos += response["data"]["user"]["repositories"]["nodes"]
 
@@ -243,10 +258,25 @@ def fetch_repositories(login):
 
     save_repos(login, repos, today)
 
-cursor = user_conn_collection.find({})    
+cursor = user_conn_collection.find({'repositories': {'$gt': 0}})
 
-for document in cursor:
-    login = document['login']
+user_df = pd.DataFrame(list(cursor))
+
+logins = user_df['login'].drop_duplicates()
+
+repo_cursor = repo_conn_collection.find()
+repo_df = pd.DataFrame(list(repo_cursor))
+if len(repo_df) > 0:
+  users = repo_df['user'].drop_duplicates()
+  last = users.iloc[-1]
+  users.drop(users.index[-1])
+else:
+  users = []
+
+for login in logins:
+    if login in list(users) or login == 'calebccff':
+      print('pula usuario')
+      continue
     print('usuario: ' + login)
     fetch_repositories(login)
 
