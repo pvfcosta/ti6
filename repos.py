@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plot
 import pymongo
 import datetime
+from time import sleep
 
 connection_string = f"mongodb+srv://pvfcosta:dsh2023.retorno@ti6-lbtqia-research.bdfqdy0.mongodb.net/test"
 
