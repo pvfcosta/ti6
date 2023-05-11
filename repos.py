@@ -17,7 +17,6 @@ GITHUB_API_ENDPOINT = "https://api.github.com/graphql"
 NUMBER_OF_ATTEMPTS = 15
 
 # colocar token aqui
-token = "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"
 
 CURSOR_QUERY = """
 query($login:String!,$cursor:String!)
@@ -135,21 +134,27 @@ else:
   repo_conn_collection = mydb.create_collection(repositories_collection)
 
 def run_query_variables(query, attemp, variables):
+  token_1 = "zZx07Qs7B4nzWLvH0waExtyRrOzsNW2Lmp7J"
 
-        headers = {"Authorization": "Bearer " + token}
+  token_2 = "GjRyws4PZUKZJJRPvag3lB4I2Wd2hQ2aWvbe"
 
-        request = requests.post(GITHUB_API_ENDPOINT, headers=headers, json={"query": query, "variables": variables})
+  if attemp > 5 and attemp <= 10:
+    headers = {"Authorization": "Bearer ghp_" + token_2} 
+  else:
+    headers = {"Authorization": "Bearer ghp_" + token_1}
 
-        if request.status_code == 200:
-            return request.json()
-        elif attemp <= NUMBER_OF_ATTEMPTS:
-            print("Tentativa de conexão falhou :(. {}/{} Tentando novamente...".format(attemp,
-                  NUMBER_OF_ATTEMPTS))
-            sleep(1)
-            return run_query_variables(query, attemp + 1, variables)
-        else:
-            raise Exception("Tentativa de conexão falhou com o erro: {}. {}".format(
-                request.status_code, query))
+  request = requests.post(GITHUB_API_ENDPOINT, headers=headers, json={"query": query, "variables": variables})
+
+  if request.status_code == 200:
+      return request.json()
+  elif attemp <= NUMBER_OF_ATTEMPTS:
+      print("Tentativa de conexão falhou :(. {}/{} Tentando novamente...".format(attemp,
+            NUMBER_OF_ATTEMPTS))
+      sleep(1)
+      return run_query_variables(query, attemp + 1, variables)
+  else:
+      raise Exception("Tentativa de conexão falhou com o erro: {}. {}".format(
+          request.status_code, query))
 
 def save_repos(login, repos, today):
     for repo in repos:
