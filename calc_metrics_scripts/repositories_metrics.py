@@ -27,9 +27,12 @@ plot.savefig("stargazers.png")
 
 plot.clf()
 
-sns.histplot(x=df_repo['primaryLanguage'])
-plot.title("Linguagagem Principal")
-plot.savefig("language.png")
+a4_dims = (10, 14)
+fig, ax = plot.subplots(figsize=a4_dims)
+chart = sns.histplot(ax=ax, x=df_repo['primaryLanguage'])
+chart.tick_params(axis='x', rotation=90)
+plot.title("Número de repositórios x Linguagem")
+plot.savefig("languages_repo.png")
 
 plot.clf()
 

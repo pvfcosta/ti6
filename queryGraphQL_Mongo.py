@@ -13,9 +13,9 @@ client = pymongo.MongoClient(connection_string)
 mydb = client['ti-data']
 
 # colocar token aqui
-token_1 = "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"
+token_1 = "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"
 
-token_2 = "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"
+token_2 = "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"
 
 token = token_2
 
@@ -77,53 +77,8 @@ query = """
         issues {
           totalCount
         }
-        repositories(first: 5, after: null) {
+        repositories {
           totalCount
-          pageInfo {
-            endCursor
-            hasNextPage
-          }
-          edges {
-            node {
-              name
-              url
-              createdAt
-              stargazers { 
-                totalCount 
-              }
-              primaryLanguage {
-                name
-              }
-              defaultBranchRef {
-                target {
-                  ... on Commit {
-                    history(first: 1) {
-                      totalCount
-                      edges {
-                        node {
-                          committedDate
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              totalIssues: issues { 
-                totalCount 
-              }
-            	closedIssues: issues(states: CLOSED) { 
-                totalCount 
-              }
-              owner {
-                __typename
-                ... on Organization {
-                  membersWithRole {
-                    totalCount
-                  }
-                }
-              }         
-            }
-          }
         }
         contributionsCollection {
           totalCommitContributions
@@ -147,15 +102,7 @@ query = """
   }
 }
 """
-org_collection = "organizations"
 user_collection = "users"
-repo_collection = "repositories"
-
-if repo_collection in mydb.list_collection_names():
-  print("The collection exists.")
-  repo_conn_collection = mydb[repo_collection]
-else:
-  repo_conn_collection = mydb.create_collection(repo_collection)
 
 if user_collection in mydb.list_collection_names():
   print("The collection exists.")
@@ -165,14 +112,7 @@ else:
 
 user_cursor = user_conn_collection.find()
 
-repo_cursor = repo_conn_collection.find()
-
 user_df = pd.DataFrame(list(user_cursor))
-
-repo_df = pd.DataFrame(list(repo_cursor))
-
-#org_cursor = org_conn_collection.find()
-#org_df = pd.DataFrame(list(org_cursor))
 
 term = "term"
 
@@ -256,7 +196,7 @@ for word in words:
                 'pronouns': node['pronouns'],
                 'createdAt': createdAt,
                 'status': node['status'],
-                #'repositories': node['repositories']['totalCount'],
+                'repositories': node['repositories']['totalCount'],
                 'location': node['location'],
                 'pullRequests':node['pullRequests']['totalCount'],
                 'issues':node['issues']['totalCount'],
@@ -264,63 +204,15 @@ for word in words:
                 'totalCommitContributions':node['contributionsCollection']['totalCommitContributions'],
                 'commitsStartedAt':node['contributionsCollection']['startedAt'],
                 'commitsEndedAt':node['contributionsCollection']['endedAt'],
-                'accountAge':accountAgeInDays.days,
+                'accountAge':accountAgeInDays.total_seconds()/3600*24*365,
                 'followers':node['followers']['totalCount'],
                 'following':node['following']['totalCount'],
                 'sponsors':node['sponsors']['totalCount'],
                 'sponsoring':node['sponsoring']['totalCount'],
                 'commitsPerWeek':commitsPerWeek
             }
-
-            # itera sobre os repositórios dos usuarios
-            for org in node['repositories']['edges']:
-                  if org['node'] is not None:
-                      org['node']['stargazers'] = org['node']['stargazers']['totalCount']   
-                      org['node']['totalIssues'] = org['node']['totalIssues']['totalCount']
-                      org['node']['closedIssues'] = org['node']['closedIssues']['totalCount'] 
-                      
-                       # linguagem do repositório 
-                      if org['node']['primaryLanguage'] is not None:
-                        org['node']['primaryLanguage'] = org['node']['primaryLanguage']['name']
-                      else:
-                        org['node']['primaryLanguage'] = 'NA' 
-
-                      # data do commit e total de commit do usuário
-                      if org['node']['defaultBranchRef'] is not None:
-                        target = org['node']['defaultBranchRef'].get('target')
-                        history = target.get('history')         
-                        if target is not None and history is not None and history['edges']:
-                           org['node']['defaultBranchRef'] = {
-                              'totalCount': history['totalCount'],
-                              'committedDate ': history['edges'][0]['node']['committedDate']
-                            }
-                        else:
-                           org['node']['defaultBranchRef'] = None
-                      else:
-                        org['node']['defaultBranchRef'] = None
-
-                      # se o repositório é uma organização ou não, caso sim, obtem a quantidade de membros
-                      if org['node']['owner']['__typename'] == 'Organization':
-                        org['node']['owner'] = {
-                              'membersWithRole': org['node']['owner']['membersWithRole']['totalCount'] ,
-                              'owner ': org['node']['owner']['__typename']
-                            }              
-                      else:
-                        org['node']['owner'] = org['node']['owner']['__typename']   
-                      
-                      allRepositories.append(org['node'])    
-                        
-            if node['repositories']['pageInfo']['endCursor'] == None:
-              break
-            query = query.replace(endCursor, '"'+node['repositories']
-                ['pageInfo']['endCursor']+'"')
-            endCursor = '"' + \
-                node['repositories']['pageInfo']['endCursor']+'"'   
                                   
             user_conn_collection.insert_one(wordResults)
-            if int(repo_total_count) > 0:
-              repo_conn_collection.insert_many(allRepositories)
-              allRepositories = []
 
           #print(result['data']['search']['pageInfo']['endCursor'])
           if result['data']['search']['pageInfo']['endCursor'] == None:
