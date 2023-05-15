@@ -13,7 +13,7 @@ client = pymongo.MongoClient(connection_string)
 mydb = client['ti-data']
 
 # colocar token aqui
-token_1 = "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"
+token_1 = "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"
 
 token_2 = "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"
 

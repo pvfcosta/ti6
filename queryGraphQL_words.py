@@ -12,7 +12,6 @@ allResults = []
 allWordsResults = []
 allOrganizations = []
 membersColumn = []
-allLanguages = {}
 
 words = ["queer", "rainbow_flag", "transgender_flag", "nonbinary", "non binary", "lesbian",
          "bisexual", "asexual", "pansexual", "transgender", "they them", "he them", "she them"]
@@ -80,29 +79,6 @@ query = """
         }
         sponsoring {
           totalCount
-        }
-      }
-    }
-  }
-}
-"""
-query_language = """
-{
-  user(login: "userlogin") {
-    contributionsCollection {
-      pullRequestContributions(first: 100) {
-        pageInfo {
-          endCursor
-          startCursor
-        }
-        nodes {
-          pullRequest {
-            files(first: 100) {
-              nodes {
-                path
-              }
-            }
-          }
         }
       }
     }
@@ -211,25 +187,7 @@ for word in words:
                             allOrganizations.append(org['node'])
                             membersColumn.append(1)
 
-                # busca lingaguens utilizadas
-                # endCursorLanguage = "null"
-                # while True:
-                query_language = query_language.replace("userlogin",
-                                                        node['login'])
-                request = requests.post('https://api.github.com/graphql',
-                                        json={'query': query_language}, headers=headers)
-                resultLanguage = request.json()
-                if 'data' in resultLanguage and resultLanguage['data'] is not None:
-                    allPrs = resultLanguage['data']['user']['contributionsCollection']['pullRequestContributions']['nodes']
-                    for pr in allPrs:
-                        prfiles = pr['pullRequest']['files']['nodes']
-                        for file in prfiles:
-                            if len(file['path'].split(".")) > 1:
-                              extension = file['path'].split(".")[1]
-                              if extension not in allLanguages:
-                                  allLanguages[extension] = 1
-                              else:
-                                  allLanguages[extension] = allLanguages[extension] + 1
+                
 
             print(result['data']['search']['pageInfo']['endCursor'])
             if result['data']['search']['pageInfo']['endCursor'] == None:
@@ -254,9 +212,6 @@ members = pd.Series(membersColumn, name='members')
 dfOrgs = pd.DataFrame(allOrganizations)
 
 dfOrgs.to_csv('organizations.csv', index=False, sep=';', encoding='utf-8')
-
-dfLanguages = pd.DataFrame(allLanguages)
-dfLanguages.to_csv('languages.csv', index=False, sep=';', encoding='utf-8')
 
 df = pd.read_csv('organizations.csv', sep=";")
 teste_concat = pd.concat([df, members], axis=1)
